@@ -1,0 +1,139 @@
+﻿@model Review_Web_App.Models.DTOs.PostResponseModel
+@{
+    Layout = "_Layout1";
+}
+<link href="~/css/PostView.css" rel="stylesheet" />
+
+<div class="post-container container mt-4">
+  
+    <div class="row">
+        <div class="col-2">
+            <img src="@Url.Content($"~/UploadedImages/{Model.ReviewerProfilePicture}")" alt="@Model.RevieweUsername's profile picture" class="rounded-circle img-fluid">
+        </div>
+        <div class="col-10">
+            <h2 class="display-4">@Model.PostTitle</h2>
+            <p>By <strong>@Model.RevieweUsername</strong> on @Model.DateCreated.ToString("MMMM dd, yyyy")</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <p>@Model.PostText</p>
+
+            @if (!string.IsNullOrEmpty(Model.PostFile))
+            {
+                <div class="post-image">
+                    <img src="@Url.Content($"~/UploadedImages/{Model.PostFile}")" alt="Post Image" class="img-fluid">
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            @if (Model.IsLikedByUser)
+            {
+                <form method="post" asp-action="Unlike" asp-controller="Posts" style="display: inline;">
+                    <input type="hidden" name="postId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-thumbs-down"></i> Unlike
+                    </button>
+                </form>
+            }
+            else
+            {
+                <form method="post" asp-action="Like" asp-controller="Posts" style="display: inline;">
+                    <input type="hidden" name="postId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-primary">
+                        <i class="far fa-thumbs-up"></i> Like
+                    </button>
+                </form>
+            }
+
+          
+            <button id="commentBtn" class="btn btn-secondary">
+                <i class="far fa-comment"></i> Add a Comment
+            </button>
+
+       
+            <form method="post" asp-action="@(Model.IsBookmarkedByUser ? "RemoveFromBookmarks" : "AddToBookmark")" asp-controller="Bookmark" style="display: inline;">
+                <input type="hidden" name="postId" value="@Model.Id" />
+                <button type="submit" class="btn @(Model.IsBookmarkedByUser ? "btn-danger" : "btn-primary")">
+                    <i class="@(Model.IsBookmarkedByUser ? "fas fa-bookmark" : "far fa-bookmark")"></i> @(Model.IsBookmarkedByUser ? "Remove Bookmark" : "Bookmark")
+                </button>
+            </form>
+
+          
+            <span>@Model.Likes.Count likes</span>
+        </div>
+    </div>
+
+  
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3>Comments (@Model.Comments.Count)</h3>
+            <hr />
+
+            <div class="comments-section" style="margin-bottom: 80px;">
+            
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="comment mb-4">
+                        <div class="comment-content d-flex justify-content-between">
+                            <div class="d-flex">
+                                @if (!string.IsNullOrEmpty(comment.FileUrl))
+                                {
+                                    <img src="@Url.Content($"~/UploadedImages/{comment.FileUrl}")" alt="@comment.ReviewerUserName's image" class="img-fluid comment-image">
+                                }
+                                <div class="ml-3">
+                                    <h5>@comment.ReviewerUserName</h5>
+                                    <p>@comment.CommentText</p>
+                                    <small class="text-muted">Posted on @comment.DateCreated.ToString("MMMM dd, yyyy")</small>
+                                </div>
+                            </div>
+
+                            @if (comment.IsCommentByUser)
+                            {
+                                <div class="comment-actions">
+                                    <form asp-action="DeleteComment" asp-controller="Posts" method="post" style="display: inline;">
+                                        <input type="hidden" name="postId" value="@comment.PostId" />
+                                        <input type="hidden" name="commentId" value="@comment.Id" />
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="far fa-trash-alt"></i> Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div id="commentOverlay" class="overlay">
+        <div class="overlay-content">
+            <span class="closebtn" id="closeBtn">&times;</span>
+            <h3>Add a Comment</h3>
+            <form id="commentForm" asp-action="Comment" asp-controller="Posts" method="post" enctype="multipart/form-data">
+                <textarea name="comment" placeholder="Add your comment here..." required></textarea>
+                <input type="hidden" name="postId" value="@Model.Id" />
+
+               
+                <div class="custom-file">
+                    <input type="file" name="file" id="fileInput" class="custom-file-input" />
+                    <label for="fileInput" id="fileLabel" class="custom-file-label">Choose file</label>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="~/js/PostView.js"></script>

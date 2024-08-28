@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Review_Web_App.Models.DTOs.PostResponseModel>
+@{
+    Layout = "_Layout1";
+}
+<link href="~/css/PostFeed.css" rel="stylesheet" />
+
+<div class="x-feed">
+    <h2 class="x-feed__title">Bookmarks</h2>
+
+    @if (Model.Any())
+    {
+        foreach (var post in Model)
+        {
+            <div class="x-post">
+                <div class="x-post__avatar">
+                    @if (!string.IsNullOrEmpty(post.ReviewerProfilePicture))
+                    {
+                        <img src="@Url.Content($"~/UploadedImages/{post.ReviewerProfilePicture}")" alt="Profile Picture" />
+                    }
+                    else
+                    {
+                        <img src="~/images/default-profile.png" alt="Default Profile Picture" />
+                    }
+                </div>
+                <div class="x-post__content">
+                    <div class="x-post__header">
+                        <span class="x-post__name">@post.RevieweUsername</span>
+                        <span class="x-post__dot">·</span>
+                    </div>
+                    <h3 class="x-post__title">@post.PostTitle</h3>
+                    <div class="x-post__body">
+                        <p>@post.PostText</p>
+                        @if (!string.IsNullOrEmpty(post.PostFile))
+                        {
+                            <div class="x-post__image">
+                                <img src="@Url.Content($"~/UploadedImages/{post.PostFile}")" alt="Attached Image" />
+                            </div>
+                        }
+                    </div>
+                    <div class="x-post__actions">
+                        <form asp-action="Post" asp-controller="Posts" method="get" class="x-post__view-form">
+                            <input type="hidden" name="id" value="@post.Id" />
+                            <button type="submit" class="x-post__view-button">View Post</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="x-feed__empty">No posts available.</p>
+    }
+</div>

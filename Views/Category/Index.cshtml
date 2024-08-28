@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Review_Web_App.Models.DTOs.CategoryResponseModel>
+
+
+<link href="~/css/IndexCategory.css" rel="stylesheet" />
+<div class="categories-container">
+    <div class="categories-table-container">
+        <h4 class="categories-title">Categories</h4>
+        <hr />
+        <table class="table table-bordered categories-table">
+            <thead>
+                <tr>
+                    <th class="categories-table-header">Name</th>
+                    <th class="categories-table-header">
+                        <a asp-action="Create" class="categories-create-link">Create</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td class="categories-table-data">@category.Name</td>
+                        <td class="categories-table-actions">
+                            <div class="categories-actions-container">
+                                <a asp-action="Edit" asp-route-name="@category.Name" class="categories-edit-link">Edit</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="back-link-container">
+        <a asp-action="Login" asp-controller="User" class="back-link">Back to List</a>
+    </div>
+</div>

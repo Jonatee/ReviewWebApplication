@@ -1,0 +1,123 @@
+﻿.user-feed {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+    .user-feed h3 {
+        text-align: center;
+        color: #343a40;
+        margin-bottom: 20px;
+    }
+
+.post-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.thought-bubble {
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 12px;
+    background-color: #f8f9fa;
+    transition: box-shadow 0.3s ease;
+}
+
+    .thought-bubble:hover {
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+.bubble-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.author-name {
+    font-weight: bold;
+    color: #1a1a1a;
+}
+
+.creation-date {
+    color: #6c757d;
+}
+
+.bubble-body {
+    margin-bottom: 15px;
+}
+
+.thought-title {
+    margin: 0 0 8px 0;
+    color: #343a40;
+}
+
+.thought-text {
+    margin-bottom: 12px;
+    color: #495057;
+}
+
+.bubble-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.appreciation-count {
+    color: #ffc107;
+    display: flex;
+    align-items: center;
+}
+
+    .appreciation-count i {
+        margin-right: 5px;
+    }
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.view-post-form,
+.remove-form {
+    margin: 0;
+}
+
+.view-post-btn,
+.remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.view-post-btn {
+    color: #007bff;
+}
+
+    .view-post-btn:hover {
+        color: #0056b3;
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+
+.remove-btn {
+    color: #dc3545;
+}
+
+    .remove-btn:hover {
+        color: #a71d2a;
+        background-color: rgba(220, 53, 69, 0.1);
+    }
+
+    .view-post-btn i,
+    .remove-btn i {
+        margin-right: 5px;
+    }
+
+.empty-stream {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+}

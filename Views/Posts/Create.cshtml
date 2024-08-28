@@ -1,0 +1,43 @@
+﻿@model Review_Web_App.Models.DTOs.PostRequestModel
+
+@{
+    Layout = "_Layout1";
+}
+<link href="~/css/CreatePostc.css" rel="stylesheet" />
+<div class="create-post-container">
+    <h2 class="create-post-title">Create Post</h2>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data" class="create-post-form">
+        <div class="form-group">
+            <label asp-for="PostTitle" class="control-label create-post-label"></label>
+            <input asp-for="PostTitle" class="form-control create-post-input" />
+            <span asp-validation-for="PostTitle" class="text-danger create-post-error"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PostText" class="control-label create-post-label"></label>
+            <textarea asp-for="PostText" class="form-control create-post-textarea"></textarea>
+            <span asp-validation-for="PostText" class="text-danger create-post-error"></span>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.CategoryId,"Category Name", htmlAttributes: new {@class = "control label create-post-label"})
+            <select asp-for="CategoryId" class="form-control create-post-select" asp-items="ViewBag.Categories">
+                <option value="">Select a category</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger create-post-error"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="PostFile" class="control-label create-post-label"></label>
+            <input asp-for="PostFile" type="file" class="form-control create-post-file" />
+            <span asp-validation-for="PostFile" class="text-danger create-post-error"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary create-post-submit" />
+        </div>
+    </form>
+</div>
+

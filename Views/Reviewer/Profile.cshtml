@@ -1,0 +1,36 @@
+﻿@model Review_Web_App.Models.DTOs.ReviewerResponseModel
+@{
+    Layout = "_Layout1";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link href="~/css/Profile.css" rel="stylesheet" />
+<div class="reviewer-profile">
+    <div class="profile-header">
+        <div class="profile-picture-container">
+            <img src="@Url.Content($"~/UploadedImages/{Model.ProfilePicture}")" alt="Profile Picture" class="profile-picture" />
+        </div>
+    </div>
+    <div class="profile-content">
+        <h2 class="profile-name">@Model.FirstName @Model.LastName</h2>
+        <p class="profile-username">@@@Model.UserName</p>
+        <div class="profile-info">
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <span>@Model.Email</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-birthday-cake"></i>
+                <span>@Model.DateOfBirth.ToString("d")</span>
+            </div>
+        </div>
+        <button class="btn btn-update-profile" onclick="location.href='@Url.Action("UpdateProfile", "Reviewer")'">
+            <i class="fas fa-user-edit"></i> Update Profile
+        </button>
+        <button class="btn btn-update-profile" onclick="location.href='@Url.Action("MyPosts", "Posts")'">
+             View All Posts
+        </button>
+        <button class="btn btn-danger" onclick="location.href='@Url.Action("DeleteProfile", "Reviewer")'">
+            Delete Account
+        </button>
+    </div>
+</div>

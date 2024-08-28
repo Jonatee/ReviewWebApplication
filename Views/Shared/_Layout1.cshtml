@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    @* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> *@
+    <title>@ViewData["Title"] - Review_Web_App</title>
+       <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="~/css/Layout1.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Review App</h1>
+        </header>
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                <button id="toggle-sidebar">☰</button>
+                <nav id="sidebar-nav">
+                    <ul>
+                        <li><a href="javascript:void(0);" onclick="window.location.href='@Url.Action("Feed", "Posts")'">Home</a></li>
+                        <li><a href="javascript:void(0);" onclick="window.location.href='@Url.Action("AllBookmarks", "Bookmark")'">Bookmarks </a></li>
+                        <li><a href="javascript:void(0);" onclick="window.location.href='@Url.Action("Profile","Reviewer")'">Profile</a></li>
+                        <li><a href="javascript:void(0);" onclick="window.location.href='@Url.Action("Search","Posts")'">Browse Reviews</a></li>
+                        <li><a class="Logout" href="javascript:void(0);" onclick="window.location.href='@Url.Action("Logout", "User")'">Logout </a></li>
+                    </ul>
+                </nav>
+            </aside>
+            <main class="main-content">
+                <div class="content-header">
+                    <h2>@ViewData["Title"]</h2>
+                    <div class="content-actions">
+                        <a href="@Url.Action("Create","Posts")" class="btn btn-primary">Write a Review</a>
+                    </div>
+                </div>
+                <div class="content-body">
+                    @RenderBody()
+                </div>
+            </main>
+        </div>
+        <footer>
+            <p>© 2024 Review App. All rights reserved.</p>
+        </footer>
+        <div id="toast"></div>
+        <script src="~/js/Layoutjava.js"></script>
+    </div>
+</body>
+</html>

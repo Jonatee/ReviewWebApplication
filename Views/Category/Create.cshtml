@@ -1,0 +1,16 @@
+﻿@model Review_Web_App.Models.DTOs.CategoryRequestModel
+@{
+    Layout = "_Layout";
+}
+<link href="~/css/CreateCategory.css" rel="stylesheet" />
+<div class="create-post-container">
+    <h2 class="create-post-title">Create Post</h2>
+    <form asp-action="Create" method="post" enctype="multipart/form-data" class="create-post-form">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label create-post-label"></label>
+            <input asp-for="Name" class="form-control create-post-input" />
+            <span asp-validation-for="Name" class="text-danger create-post-error"></span>
+        </div>
+        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block create-post-submit" type="submit">Create</button>
+    </form>
+</div>

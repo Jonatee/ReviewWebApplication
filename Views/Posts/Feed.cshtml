@@ -1,0 +1,56 @@
+﻿@model Review_Web_App.Models.DTOs.BaseResponse<ICollection<Review_Web_App.Models.DTOs.PostResponseModel>>
+@{
+    Layout = "_Layout1";
+}
+<link href="~/css/PostFeed.css" rel="stylesheet" />
+
+<div class="x-feed">
+    <h2 class="x-feed__title">Feeds</h2>
+
+    @if (Model != null && Model.Data != null && Model.Data.Count > 0)
+    {
+        foreach (var post in Model.Data)
+        {
+            <div class="x-post">
+                <div class="x-post__avatar">
+                    @if (!string.IsNullOrEmpty(post.ReviewerProfilePicture))
+                    {
+                        <img src="@Url.Content($"~/UploadedImages/{post.ReviewerProfilePicture}")" alt="Profile Picture" />
+                    }
+                    else
+                    {
+                        <img src="~/images/default-profile.png" alt="Default Profile Picture" />
+                    }
+                </div>
+                <div class="x-post__content">
+                    <div class="x-post__header">
+                        <span class="x-post__name">@post.RevieweUsername</span>
+                        <span class="x-post__dot">·</span>
+                        <span class="x-post__time">@((DateTime.Now - post.DateCreated).TotalHours < 24 ? $"{(int)(DateTime.Now - post.DateCreated).TotalHours}h" : post.DateCreated.ToString("MMM d"))</span>
+                    </div>
+                    <h3 class="x-post__title">@post.PostTitle</h3>
+                    <div class="x-post__body">
+                        <p>@post.PostText</p>
+                        @if (!string.IsNullOrEmpty(post.PostFile))
+                        {
+                            <div class="x-post__image">
+                                <img src="@Url.Content($"~/UploadedImages/{post.PostFile}")" alt="Attached Image" />
+                            </div>
+                        }
+                    </div>
+                    <div class="x-post__actions">
+                        <span class="x-post__action">❤️ @post.Likes.Count</span>
+                        <form asp-action="Post" asp-controller="Posts" method="get" class="x-post__view-form">
+                            <input type="hidden" name="id" value="@post.Id" />
+                            <button type="submit" class="x-post__view-button">View Post</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="x-feed__empty">No posts available.</p>
+    }
+</div>

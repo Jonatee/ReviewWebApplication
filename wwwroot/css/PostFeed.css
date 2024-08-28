@@ -1,0 +1,122 @@
+﻿body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,cursive,'Comic Sans MS';
+    background-color: #ffffff;
+    color: #0f1419;
+    line-height: 1.3;
+}
+
+.x-feed {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.x-feed__title {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 16px 0;
+    border-bottom: 1px solid #eff3f4;
+}
+
+.x-post {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid #eff3f4;
+}
+
+.x-post__avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+}
+
+    .x-post__avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+.x-post__content {
+    flex: 1;
+}
+
+.x-post__header {
+    margin-bottom: 4px;
+}
+
+.x-post__name {
+    font-weight: 700;
+}
+
+.x-post__handle, .x-post__time, .x-post__dot {
+    color: #536471;
+    font-size: 15px;
+}
+
+.x-post__dot {
+    margin: 0 4px;
+}
+
+.x-post__body {
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.x-post__image {
+    margin-top: 12px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+    .x-post__image img {
+        width: 100%;
+        height: auto;
+    }
+
+/* ... (keep all previous CSS) ... */
+
+.x-post__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 425px;
+    color: #536471;
+    margin-top: 12px;
+}
+
+.x-post__action {
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.x-post__view-form {
+    margin-left: auto;
+}
+
+.x-post__view-button {
+    background-color: #1da1f2;
+    color: #ffffff;
+    border: none;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+    .x-post__view-button:hover {
+        background-color: #1a91da;
+    }
+
+    .x-post__view-button:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #1da1f2;
+    }
+
+.x-feed__empty {
+    text-align: center;
+    color: #536471;
+    padding: 20px 0;
+}

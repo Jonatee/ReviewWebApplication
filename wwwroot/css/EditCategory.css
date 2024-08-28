@@ -1,0 +1,89 @@
+﻿.edit-form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.edit-input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.edit-error {
+    color: #red;
+}
+
+.edit-submit {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: #1da1f2;
+    color: #fff;
+    cursor: pointer;
+}
+
+    .edit-submit:hover {
+        background-color: #1a8cd8;
+    }
+
+/* Add some colorful gradients */
+.edit-form-container {
+    background: linear-gradient(to bottom, #f6f6f6, #fff);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-submit {
+    background: linear-gradient(to bottom, #1da1f2, #1a8cd8);
+}
+
+/* Add some animations */
+.edit-form-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.edit-submit {
+    animation: pulse 1s infinite;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

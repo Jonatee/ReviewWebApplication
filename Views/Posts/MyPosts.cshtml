@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Review_Web_App.Models.DTOs.PostResponseModel>
+@{
+    Layout = "_Layout1";
+}
+<link href="~/css/Mypost.css" rel="stylesheet" />
+<div class="user-feed">
+    <h3>Your Review Posts</h3>
+    @if (Model.Any()|| Model != null)
+    {
+        <ul class="post-list">
+            @foreach (var post in Model)
+            {
+                <li class="thought-bubble">
+                    <div class="bubble-header">
+                        <span class="author-name">@post.RevieweUsername</span>
+                        <span class="creation-date">@post.DateCreated.ToString("MMM dd")</span>
+                    </div>
+                    <div class="bubble-body">
+                        <h4 class="thought-title">@post.PostTitle</h4>
+                        <p class="thought-text">@post.PostText</p>
+                    </div>
+                    <div class="bubble-footer">
+                        <span class="appreciation-count">
+                            <i class="fas fa-star"></i> @post.Likes.Count
+                        </span>
+                        <div class="action-buttons">
+                            <form asp-action="Post" asp-controller="Posts" method="get" class="view-post-form">
+                                <input type="hidden" name="id" value="@post.Id" />
+                                <button type="submit" class="view-post-btn">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                            </form>
+                            <form asp-action="Delete" asp-controller="Posts" method="post" class="remove-form">
+                                <input type="hidden" name="id" value="@post.Id" />
+                                <button type="submit" class="remove-btn">
+                                    <i class="fas fa-times"></i> Remove
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p class="empty-stream">You have no Posts. Start sharing your ideas!</p>
+    }
+</div>

@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+<link href="~/css/HomeIndex.css" rel="stylesheet" />
+<div class="container">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+            <a class="navbar-brand" href="#">
+                <img src="~/Images/logo.jpg" alt="Review App" class="logo">
+            </a>
+            <button class="btn btn-outline-primary" onclick="location.href='@Url.Action("Login", "User")'">Login</button>
+
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Welcome to Review App</h1>
+            <p>Where your opinions shape the future. Join our community today!</p>
+            <button class="btn btn-primary" onclick="location.href='@Url.Action("Registeration", "User")'">Get Started</button>
+        </section>
+        <section class="features">
+            <h2>Our Features</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <i class="fas fa-star"></i>
+                    <h3>Rate and Review</h3>
+                    <p>Share your experiences to help others make informed decisions.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-search"></i>
+                    <h3>Search and Discover</h3>
+                    <p>Find products, services, and experiences tailored to your needs.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-users"></i>
+                    <h3>Community Support</h3>
+                    <p>Connect with like-minded individuals and build a support network.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
