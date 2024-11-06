@@ -1,6 +1,8 @@
 ﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Review_Web_App.Constants;
 using Review_Web_App.Models.DTOs;
 using Review_Web_App.Services.Interfaces;
 
@@ -14,7 +16,7 @@ namespace Review_Web_App.Controllers
         {
             _reviewerService = reviewerService;
         }
-
+        [Authorize(Roles = RoleConstants.Reviewer)]
         public async Task<IActionResult> Profile()
         {
             var response = await _reviewerService.GetReviewerByLoggedInUser();
@@ -24,6 +26,7 @@ namespace Review_Web_App.Controllers
             }
             return View();
         }
+        [Authorize(Roles = RoleConstants.Reviewer)]
         [HttpGet]
         public async Task<IActionResult> UpdateProfile()
         {
@@ -41,6 +44,7 @@ namespace Review_Web_App.Controllers
             }
             return View("Profile");
         }
+        [Authorize(Roles = RoleConstants.Reviewer)]
         [HttpPost]
         public async Task<IActionResult> UpdateProfile(ReviewerUpdateModel model)
         {

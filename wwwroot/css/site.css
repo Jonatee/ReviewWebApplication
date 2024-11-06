@@ -20,3 +20,67 @@ html {
 body {
   margin-bottom: 60px;
 }
+.navbar {
+    padding: 10px 0;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+    .navbar-brand img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+.navbar-nav {
+    flex-direction: row;
+}
+
+.nav-item {
+    margin-right: 20px;
+}
+
+.nav-link {
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+    .nav-link:hover {
+        color: #007bff;
+    }
+
+.navbar-toggler {
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%280, 0, 0, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30px 30px;
+}
+
+.navbar-collapse {
+    flex-basis: 100%;
+    align-items: center;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.mr-auto {
+    margin-right: auto;
+}

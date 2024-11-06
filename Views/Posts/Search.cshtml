@@ -15,7 +15,7 @@
 
 
 <div class="search-form">
-    <form asp-action="Search" asp-controller="Posts" method="post">
+    <form asp-action="SearchResults" asp-controller="Posts" method="get">
         <div class="form-group">
             <label for="title" class="control-label">Search by title:</label>
             <textarea id="title" name="title" placeholder="Search..." class="form-control" required></textarea>
@@ -39,32 +39,3 @@
 </div>
 
 
-@if (Model != null && Model.Any())
-{
-    <div class="search-results">
-        <h3>Search Results</h3>
-        @foreach (var post in Model)
-        {
-            <div class="post-result">
-                <h4>@post.PostTitle</h4>
-                <p>@post.PostText</p>
-                @if (!string.IsNullOrEmpty(post.PostFile))
-                {
-                    <img src="@Url.Content($"~/UploadedImages/{post.PostFile}")" alt="Post Image" style="max-width: 100%; height: auto;" />
-                }
-                <p>Reviewed by: @post.RevieweUsername</p>
-                <p>Date Created: @post.DateCreated.ToString("MM/dd/yyyy")</p>
-            </div>
-            <div class="ViewPost">
-                <form asp-action="Post" asp-controller="Posts" method="get" class="x-post__view-form">
-                    <input type="hidden" name="id" value="@post.Id" />
-                    <button type="submit" class="x-post__view-button">View Post</button>
-                </form>
-            </div>
-        }
-    </div>
-}
-else
-{
-    <p class="no-results">No results found</p>
-}

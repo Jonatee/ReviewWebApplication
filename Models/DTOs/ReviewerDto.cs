@@ -4,11 +4,14 @@ namespace Review_Web_App.Models.DTOs
 {
     public class ReviewerRequestModel
     {
-        [Required(ErrorMessage = "FirstName is Required")]
+        [Required(ErrorMessage = "Firstname is Required")]
+        [StringLength(32, MinimumLength = 2)]
         public string FirstName { get; set; } = default!;
-        [Required(ErrorMessage = "LastName is Required")]
+        [Required(ErrorMessage = "Lastname is Required")]
+        [StringLength(32, MinimumLength = 2)]
         public string LastName { get; set; } = default!;
-        [Required(ErrorMessage = "UserName is Required")]
+        [Required(ErrorMessage = "Username is Required")]
+        [StringLength(32, MinimumLength = 8, ErrorMessage= "Username must be 8 character long")]
         public string UserName { get; set; } = default!;
         [Required(ErrorMessage = "Email is Required")]
         [RegularExpression(@"^[^\s@]+@[^\s@]+\.[^\s@]+$", ErrorMessage = "Please enter a valid email address")]
@@ -16,11 +19,11 @@ namespace Review_Web_App.Models.DTOs
         [Required]
         public string VerificationCode { get; set; } = default!;
         [Required(ErrorMessage = "Password is required")]
-        [StringLength(100, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters long")]
+        [StringLength(32, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters long")]
         [RegularExpression(@"^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).+$", ErrorMessage = "Password must contain at least one letter, one number, and one special character")]
         public string Password { get; set; } = default!;
         [Required]
-        [Compare("Password", ErrorMessage = "PassWord does not Match")]
+        [Compare("Password", ErrorMessage = "Password does not Match")]
         public string ConfirmPassWord { get; set; } = default!;
         public DateOnly DateOfBirth { get; set; } = default!;
         public IFormFile? ProfilePicture { get; set; }

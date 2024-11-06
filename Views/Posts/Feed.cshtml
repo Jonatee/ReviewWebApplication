@@ -2,6 +2,21 @@
 @{
     Layout = "_Layout1";
 }
+@if(TempData["Message"] != null)
+{
+    if(Model.Success)
+    {
+        <div class="alert alert-success">
+            @TempData["Message"]
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            @TempData["Message"]
+        </div>
+    }
+}
 <link href="~/css/PostFeed.css" rel="stylesheet" />
 
 <div class="x-feed">

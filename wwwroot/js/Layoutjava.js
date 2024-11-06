@@ -12,3 +12,8 @@ function showToast(message) {
         toast.className = toast.className.replace('show', '');
     }, 3000);
 }
+window.setTimeout(function () {
+    $(".alert").fadeTo(500, 0).slideUp(500, function () {
+        $(this).remove();
+    })
+}, 3000);

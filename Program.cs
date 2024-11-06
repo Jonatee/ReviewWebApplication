@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Review_Web_App.Configurations;
 using Review_Web_App.Context;
 using Review_Web_App.Extensions;
+using System.Security.Policy;
+using System.Web.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,5 +42,10 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "search",
+    pattern: "Posts/Search/{title}/{categoryId?}",
+    defaults: new { controller = "Posts", action = "Search"}
+    );
 
 app.Run();

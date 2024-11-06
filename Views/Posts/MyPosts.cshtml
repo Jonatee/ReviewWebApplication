@@ -5,7 +5,7 @@
 <link href="~/css/Mypost.css" rel="stylesheet" />
 <div class="user-feed">
     <h3>Your Review Posts</h3>
-    @if (Model.Any()|| Model != null)
+    @if (Model != null)
     {
         <ul class="post-list">
             @foreach (var post in Model)

@@ -3,15 +3,18 @@ using Review_Web_App.Context;
 using Review_Web_App.Entities;
 using Review_Web_App.Repositories.Interfaces;
 using System.Linq.Expressions;
+using System.Security.Claims;
 
 namespace Review_Web_App.Repositories.Implementations
 {
     public class CommentRepository : BaseRepository<Comment>, ICommentRepository
     {
         private readonly ReviewAppContext _context;
-        public CommentRepository(ReviewAppContext context) : base(context)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public CommentRepository(ReviewAppContext context ,IHttpContextAccessor httpContexts) : base(context)
         {
             _context = context;
+            _httpContextAccessor = httpContexts;
         }
 
        
@@ -30,7 +33,8 @@ namespace Review_Web_App.Repositories.Implementations
 
         public async  Task<ICollection<Comment?>> GetAll()
         {
-            var comments = await _context.Comments.Include(a => a.Reviewer).Include(a => a.Post).ToListAsync();
+            Guid.TryParse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier), out Guid userID);
+            var comments = await _context.Comments.Include(a => a.Reviewer).Include(a => a.Post).OrderBy(p=>p.Reviewer.UserId == userID).ThenByDescending(c => c.DateCreated).ToListAsync();
             return comments;
         }
         public async Task<bool> Delete(Guid Id,Guid postId, Guid reviewerId)

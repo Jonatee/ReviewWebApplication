@@ -1,42 +1,108 @@
 ﻿@{
     Layout = null;
 }
-<link href="~/css/HomeIndex.css" rel="stylesheet" />
-<div class="container">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-            <a class="navbar-brand" href="#">
-                <img src="~/Images/logo.jpg" alt="Review App" class="logo">
-            </a>
-            <button class="btn btn-outline-primary" onclick="location.href='@Url.Action("Login", "User")'">Login</button>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review App - Where Your Opinion Matters</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="~/css/HomeIndex.css">
+</head>
+<body>
+   @*  <header>
+        <nav class="navbar">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="~/Images/logo.jpg" alt="Review App" class="logo">
+                </a>
+                <button class="btn btn-outline-primary" onclick="location.href='@Url.Action("Login", "User")'">Login</button>
+            </div>
         </nav>
-    </header>
+    </header> *@
+
     <main>
         <section class="hero">
-            <h1>Welcome to Review App</h1>
-            <p>Where your opinions shape the future. Join our community today!</p>
-            <button class="btn btn-primary" onclick="location.href='@Url.Action("Registeration", "User")'">Get Started</button>
+            <div class="container">
+                <h1>Welcome to Review App</h1>
+                <p>Where your opinions shape the future. Join our community today!</p>
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("Registeration", "User")'">Get Started</button>
+            </div>
         </section>
+
         <section class="features">
-            <h2>Our Features</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <i class="fas fa-star"></i>
-                    <h3>Rate and Review</h3>
-                    <p>Share your experiences to help others make informed decisions.</p>
-                </div>
-                <div class="col-md-4">
-                    <i class="fas fa-search"></i>
-                    <h3>Search and Discover</h3>
-                    <p>Find products, services, and experiences tailored to your needs.</p>
-                </div>
-                <div class="col-md-4">
-                    <i class="fas fa-users"></i>
-                    <h3>Community Support</h3>
-                    <p>Connect with like-minded individuals and build a support network.</p>
+            <div class="container">
+                <h2>Our Features</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <i class="fas fa-star"></i>
+                        <h3>Rate and Review</h3>
+                        <p>Share your experiences to help others make informed decisions.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <i class="fas fa-search"></i>
+                        <h3>Search and Discover</h3>
+                        <p>Find products, services, and experiences tailored to your needs.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <i class="fas fa-users"></i>
+                        <h3>Community Support</h3>
+                        <p>Connect with like-minded individuals and build a support network.</p>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-</div>
+
+    <footer class="review-app-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>About Review App</h3>
+                    <p>Empowering users to make informed decisions through authentic reviews and ratings.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="@Url.Action("Feed", "Posts")">Explore</a></li>
+                        <li><a href="#">Write a Review</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> support@reviewapp.com</p>
+                    <p><i class="fas fa-phone"></i> +234 (81) 644-64448</p>
+                </div>
+                <div class="footer-section rating">
+                    <h3>Our Rating</h3>
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>4.5 out of 5 based on 10,000+ reviews</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Review App. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Review_Web_App.Constants;
 using Review_Web_App.Models.DTOs;
 using Review_Web_App.Services.Interfaces;
 using System.Security.AccessControl;
@@ -15,16 +17,12 @@ namespace Review_Web_App.Controllers
             _bookmarkService = bookmarkService;
             _reviewerService = reviewerService;
         }
+        [Authorize(Roles = RoleConstants.Reviewer)]
         public async Task<IActionResult> AllBookmarks()
         {
             var reviewerId = await _reviewerService.GetReviewerByLoggedInUser();
             var response = await _bookmarkService.GetReviewerBookmark(reviewerId.Data.Id);
-            if(response.Success)
-            {
-                return View(response.Data);
-            }
-            ViewBag.Message = response.Message;
-            return Content(response.Message);
+            return View(response.Data);
         }
 
 

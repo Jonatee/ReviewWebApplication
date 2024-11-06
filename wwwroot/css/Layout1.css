@@ -32,7 +32,6 @@ header {
     position: fixed;
     padding: 7px 10px;
     text-align: center;
-    filter:blur(10px);
     width: 100%;
     flex-shrink: 0;
     top:0;
@@ -106,9 +105,18 @@ header {
     .sidebar nav ul li a.Logout {
         position: fixed;
         bottom: 20px;
-        
         padding: 10px;
         background-color:red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .sidebar nav ul li a.Login {
+        position: fixed;
+        bottom: 20px;
+        padding: 10px;
+        background-color: lightgreen;
         color: white;
         border: none;
         border-radius: 5px;

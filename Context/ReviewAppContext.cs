@@ -43,9 +43,9 @@ namespace Review_Web_App.Context
                 }
 
                 );
-           
-       
-           
+
+
+            modelBuilder.HasDbFunction(() => Soundex(default)).HasName("SOUNDEX");
 
             modelBuilder.Entity<Reviewer>()
                 .Property(r => r.DateOfBirth)
@@ -54,7 +54,12 @@ namespace Review_Web_App.Context
            
         
 
-    }
+        }
+
+        public static string Soundex(string input)
+        {
+            throw new NotSupportedException();
+        }
 
 
 }

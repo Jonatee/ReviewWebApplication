@@ -154,7 +154,7 @@ namespace Review_Web_App.Services.Implementations
             var reviewerResponse = await _reviewerService.GetReviewer(post.ReviewerId);
             BaseResponse<UserResponse> userResponse = await _userService.GetUser(reviewerResponse.Data.UserId);
             var reviewerProfilePicture = reviewerResponse?.Data.ProfilePicture;
-            var reviewerUsername = userResponse?.Data.UserName;
+            var reviewerUsername = userResponse.Data?.UserName;
             var comments = new List<CommentResponseModel>();
             foreach (var comment in post.Comments)
             {

@@ -65,7 +65,7 @@ namespace Review_Web_App.Services.Implementations
             var getBookmark = await _bookmarkRepository.Get(x => x.ReviewerId == request.ReviewerId && x.PostId == request.PostId);
             if (getBookmark != null)
             {
-                _bookmarkRepository.Delete(getBookmark);
+                await _bookmarkRepository.Delete(getBookmark);
                 await _unitOfWork.SaveWork();
                 return new BaseResponse<BookmarkResponseModel>
                 {
@@ -114,8 +114,8 @@ namespace Review_Web_App.Services.Implementations
             {
                     var reviewerResponse = await _reviewerService.GetReviewer(bookmark.ReviewerId);
                     BaseResponse<UserResponse> userResponse = await _userService.GetUser(reviewerResponse.Data.UserId);
-                    var reviewerProfilePicture = reviewerResponse?.Data.ProfilePicture;
-                    var reviewerUsername = userResponse.Data.UserName;
+                    var reviewerProfilePicture = reviewerResponse.Data.ProfilePicture;
+                    var reviewerUsername = userResponse.Data?.UserName;
                     var postResponse = new PostResponseModel
                     {
                         PostTitle = bookmark.PostTitle,

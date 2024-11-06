@@ -1,19 +1,15 @@
-﻿
- *@
-@model Review_Web_App.Models.DTOs.ReviewerRequestModel
+﻿@model Review_Web_App.Models.DTOs.ReviewerRequestModel
 
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
 <link href="~/css/Registeration.css" rel="stylesheet" />
 
 <div class="container reviewer-form-container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h2 class="text-center mb-4">Create Profile</h2>
+            <h2 class="text-center mb-4">Register An Account</h2>
             <form asp-action="Registeration" method="post" enctype="multipart/form-data">
                 <div class="form-group mb-3">
                     <label asp-for="FirstName" class="form-label"></label>
@@ -32,15 +28,15 @@
                 </div>
                 <div class="form-group mb-3">
                     <label asp-for="Email" class="form-label"></label>
-                    <input asp-for="Email" class="form-control" id="emailInput" type="email" required />
+                    <input asp-for="Email" class="form-control" id="emailInput" type="email"/>
                     <button type="button" id="verifyEmailButton" class="btn btn-secondary" disabled>Verify</button>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
 
                 <div id="verificationSection">
                     <div class="form-group mb-3">
-                        <label for="verificationCode">Verification Code</label>
-                        <input type="text" id="verificationCode" name="VerificationCode" class="form-control" required />
+                        <label asp-for="VerificationCode">Verification Code</label>
+                        <input asp-for="VerificationCode" type="text" id="verificationCode" name="VerificationCode" class="form-control"/>
                         <span asp-validation-for="VerificationCode" class="text-danger"></span>
                     </div>
                 </div>
@@ -65,15 +61,14 @@
                     <input asp-for="ProfilePicture" class="form-control-file" type="file" />
                 </div>
                 <button type="submit" class="btn btn-primary w-100 mb-3">Create Profile</button>
+              
             </form>
-
             <form id="verificationForm" asp-action="SendVerificationCode" method="post" style="display:none;">
                 <input type="hidden" id="emailHidden" name="Email" />
             </form>
         </div>
     </div>
 </div>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const emailInput = document.getElementById('emailInput');
@@ -111,9 +106,9 @@
 </script>
 
 
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+

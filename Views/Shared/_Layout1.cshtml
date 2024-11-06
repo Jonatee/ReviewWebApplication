@@ -25,7 +25,14 @@
                         <li><a href="javascript:void(0);" onclick="window.location.href='@Url.Action("AllBookmarks", "Bookmark")'">Bookmarks </a></li>
                         <li><a href="javascript:void(0);" onclick="window.location.href='@Url.Action("Profile","Reviewer")'">Profile</a></li>
                         <li><a href="javascript:void(0);" onclick="window.location.href='@Url.Action("Search","Posts")'">Browse Reviews</a></li>
-                        <li><a class="Logout" href="javascript:void(0);" onclick="window.location.href='@Url.Action("Logout", "User")'">Logout </a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a class="Logout" href="javascript:void(0);" onclick="window.location.href='@Url.Action("Logout", "User")'">Logout </a></li>
+                        }
+                        else
+                        {
+                            <li><a class="Logout" href="javascript:void(0);" onclick="window.location.href='@Url.Action("Login", "User")'">Login</a></li>
+                        }
                     </ul>
                 </nav>
             </aside>

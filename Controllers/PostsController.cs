@@ -25,7 +25,7 @@ namespace Review_Web_App.Controllers
         private readonly ILikeService _likeService;
 
 
-        public PostsController(ReviewAppContext context,ILikeService likeService,ICommentService commentService,IReviewerService reviewerService,ICategoryService categoryService,IPostService postService)
+        public PostsController(ReviewAppContext context, ILikeService likeService, ICommentService commentService, IReviewerService reviewerService, ICategoryService categoryService, IPostService postService)
         {
             _categoryService = categoryService;
             _reviewerService = reviewerService;
@@ -35,7 +35,6 @@ namespace Review_Web_App.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = RoleConstants.Reviewer)]
         public async Task<IActionResult> Feed()
         {
             Response.Headers.Add("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -43,7 +42,7 @@ namespace Review_Web_App.Controllers
             Response.Headers.Add("Expires", "0");
 
             var response = await _postService.GetAllPosts();
-            if(response.Success)
+            if (response.Success)
             {
                 await PopulateCategoriesDropdown();
                 return View(response);
@@ -59,7 +58,7 @@ namespace Review_Web_App.Controllers
             Response.Headers.Add("Expires", "0");
 
             var post = await _postService.GetPost(id);
-            if(post.Success)
+            if (post.Success)
             {
                 await PopulateCategoriesDropdown();
                 return View(post.Data);
@@ -67,51 +66,61 @@ namespace Review_Web_App.Controllers
             ViewBag.Message = post.Message;
             return View();
         }
-        public async Task<IActionResult> Comment(string comment,Guid postId,IFormFile file)
+        [Authorize(Roles = RoleConstants.Reviewer)]
+        public async Task<IActionResult> Comment(string comment, Guid postId, IFormFile file)
         {
             var reviewerId = await _reviewerService.GetReviewerByLoggedInUser();
-            var model = new CommentRequestModel { CommentText = comment,PostId = postId,FileUrl = file,ReviewerId = reviewerId.Data.Id};
+            var model = new CommentRequestModel { CommentText = comment, PostId = postId, FileUrl = file, ReviewerId = reviewerId.Data.Id };
             var response = await _commentService.CreateComment(model);
-            if(response.Success)
+            if (response.Success)
             {
                 return RedirectToAction("Post", new { id = postId });
             }
             return View();
         }
-        public async Task<IActionResult> DeleteComment(Guid postId , Guid commentId)
+
+
+        public async Task<IActionResult> DeleteComment(Guid postId, Guid commentId)
         {
             var reviewerId = await _reviewerService.GetReviewerByLoggedInUser();
-            var response = await _commentService.DeleteComments(postId, reviewerId.Data.Id,commentId);
-            if(response.Success)
+            var response = await _commentService.DeleteComments(postId, reviewerId.Data.Id, commentId);
+            if (response.Success)
             {
                 return RedirectToAction("Post", new { id = postId });
             }
             ViewBag.Message = response.Message;
             return Content(response.Message);
         }
+
+
+        [Authorize(Roles = RoleConstants.Reviewer)]
         public async Task<IActionResult> MyPosts()
         {
             var response = await _postService.GetReviewerPosts();
-            if(response.Success)
+            if (response.Success)
             {
                 return View(response.Data);
 
             }
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> Search()
         {
             await PopulateCategoriesDropdown();
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> Search(string title,Guid? categoryId)
+
+
+        [HttpGet]
+        public async Task<IActionResult> SearchResults(string title,Guid? categoryId)
         {
             await PopulateCategoriesDropdown();
             var response = await _postService.Search(title, categoryId);
            
             return View(response.Data);
         }
+
 
         [Authorize(Roles = RoleConstants.Reviewer)]
         public async Task<IActionResult> Create()
@@ -129,12 +138,16 @@ namespace Review_Web_App.Controllers
                 var response = await _postService.CreatePost(model);
                 if(response.Success)
                 {
+                    TempData["Message"] = response.Message;
                     return RedirectToAction("Feed");
                 }
+                TempData["Message"] = response.Message;
             }
             await PopulateCategoriesDropdown();
             return View(model);
         }
+
+
         private async Task PopulateCategoriesDropdown()
         {
             var categoryResponse = await _categoryService.GetAllCategories();
@@ -147,6 +160,7 @@ namespace Review_Web_App.Controllers
             ViewBag.Categories = new SelectList(categories, "Value", "Text");
         }
 
+        [Authorize(Roles = RoleConstants.Reviewer)]
         [HttpPost]
         public async Task<IActionResult> Like(Guid postId)
         {
