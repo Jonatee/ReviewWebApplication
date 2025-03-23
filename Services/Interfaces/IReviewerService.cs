@@ -12,4 +12,4 @@ namespace Review_Web_App.Services.Interfaces
         Task<BaseResponse<ReviewerResponseModel>> GetReviewer(Guid Id);
 
     }
-}
+} 
